@@ -1,4 +1,5 @@
 export const API_BASE_URL = "https://xaus.com/api/v1";
+export const CATALOGUE_API_BASE_URL = "https://jsonplaceholder.typicode.com/posts"
 
 export const DEFAULT_CURRENCY = "MAD";
 export const SUPPORTED_CURRENCIES = ["MAD", "USD", "EUR"];
