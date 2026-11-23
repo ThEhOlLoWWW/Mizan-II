@@ -104,6 +104,34 @@ export function renderCards(spotData) {
   });
 }
 
+export function renderCatalogue(items) {
+  const container = document.getElementById("catalogue-container");
+  container.replaceChildren();
+
+  items.forEach((item) => {
+    const article = document.createElement("article");
+    article.className = "catalogue-item";
+
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+
+    const description = document.createElement("p");
+    description.textContent = item.description;
+
+    const price = document.createElement("p");
+    price.textContent = `${item.price} MAD`;
+
+    const status = document.createElement("p");
+    status.textContent = item.status;
+
+    const date = document.createElement("p");
+    date.textContent = item.date;
+
+    article.append(title, description, price, status, date);
+    container.appendChild(article);
+  });
+}
+
 export function formatTimestamp(isoString) {
   const date = new Date(isoString);
   if (!isoString || Number.isNaN(date.getTime())) {

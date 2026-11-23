@@ -780,6 +780,7 @@ select.control {
   }
   .status-banner,
   .cards-section,
+  .catalogue-section,
   .logs-drawer {
     grid-column: 1 / -1;
   }

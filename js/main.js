@@ -20,7 +20,12 @@ import {
   renderEstimate,
   showWeightError,
   renderLogs,
+  renderCatalogue,
 } from "./ui.js";
+
+import { getCatalogue } from "./catalogue-api.js";
+
+import { getCatalogueState, setCatalogueState } from "./catalogue-state.js";
 
 const currencySelect = document.getElementById("currency-select");
 const lastUpdated = document.getElementById("last-updated-text");
@@ -65,6 +70,17 @@ async function loadPrices() {
   } finally {
     setBusy(false);
     renderLogs(networkLogs);
+  }
+}
+
+async function loadCatalogue() {
+  try {
+    const items = await getCatalogue();
+
+    setCatalogueState(items);
+    renderCatalogue(getCatalogueState());
+  } catch (error) {
+    console.error("Failed to load catalogue:", error);
   }
 }
 
@@ -123,3 +139,4 @@ document.getElementById("btn-clear-logs").addEventListener("click", () => {
 });
 
 loadPrices();
+loadCatalogue();

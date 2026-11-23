@@ -77,3 +77,29 @@ export async function request(path, options = {}) {
     clearTimeout(timeoutId);
   }
 }
+
+export function mapPostToCatalogueItem(post) {
+  const date = new Date();
+  date.setDate(date.getDate() - post.id);
+  const catalogue = {
+    id: post.id,
+    title: post.title,
+    description: post.body,
+    price: post.id * 100,
+    status: post.id % 2 === 0 ? "available" : "unavailable",
+    date: date.toISOString().split("T")[0],
+  };
+  return catalogue;
+}
+
+export async function getCatalogue() {
+  const posts = await request("/posts");
+  const catalogue = posts.map((post) => mapPostToCatalogueItem(post));
+  return catalogue;
+}
+
+export async function getCatalogueItem(id) {
+  const post = await request(`/posts/${id}`);
+  const item = mapPostToCatalogueItem(post);
+  return item;
+}
